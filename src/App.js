@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import { Context } from "./context/Context";
+import MovieCard from "./components/MovieCard";
+import { Grid, Paper } from "@material-ui/core";
+import Header from "./components/Header";
 
 function App() {
+  const { movies } = useContext(Context);
+
+  const movieElements = movies
+    .filter((movie) => movie.poster_path)
+    .map((movie) => {
+      return (
+        <Grid item xs={8} sm={8} md={8} lg={8} xl={8} key={movie.id}>
+          <Paper elevation={3}>
+            <MovieCard movie={movie} />
+          </Paper>
+        </Grid>
+      );
+    });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Header />
+      <div className="main">
+        <Grid
+          container
+          spacing={0}
+          justify="center"
+          alignItems="center"
+          style={{ height: "100%" }}
         >
-          Learn React
-        </a>
-      </header>
+          {movieElements}
+        </Grid>
+      </div>
     </div>
   );
 }
