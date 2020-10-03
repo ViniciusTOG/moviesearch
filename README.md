@@ -1,1 +1,1 @@
-React Movie Search webapp using themoviedb API.
+React Movie Search webapp using themoviedb API and Material UI.
